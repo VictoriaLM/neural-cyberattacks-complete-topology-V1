@@ -1,0 +1,3 @@
+init_attack:1800
+end_attack:1900
+n_neurons:57731
