@@ -726,6 +726,8 @@ nest::SimulationManager::FLO_attack_()
   std::random_device rd;
   std::mt19937 gen(rd());
   std::uniform_int_distribution<> dis(0,230923);
+  // The value 551 from the attributes file represents the voltage threshold of the neuron.
+  int v_th = 551;
 
   while (unique_numbers.size() < std::stoi(FLO_dict["n_neurons"])) {
     int random_num = dis(gen);
@@ -751,7 +753,7 @@ nest::SimulationManager::FLO_attack_()
         auto it = std::find(list_random.begin(), list_random.end(), node->get_node_id());
         if(it != list_random.end())
         {  
-          if(std::stoi(FLO_dict["v_increment"]) == 551)
+          if(std::stoi(FLO_dict["v_increment"]) == v_th)
           {
 
             dict_consulting["V_m"] = dict_consulting["V_th"];
@@ -778,7 +780,7 @@ nest::SimulationManager::FLO_attack_()
 
       if(!dict_consulting["V_m"].empty())
       { 
-        if(std::stoi(FLO_dict["v_increment"]) == 551)
+        if(std::stoi(FLO_dict["v_increment"]) == v_th)
         {
           dict_consulting["V_m"] = dict_consulting["V_th"]; 
         }else{
